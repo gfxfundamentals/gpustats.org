@@ -3,6 +3,7 @@
   --main-fg-color: #000;
   --tooltip-bg-color: rgba(255, 255, 255, 0.7);
   --selected-bg-color: #222;
+  --chart-area-bg-color: #fff;
 
   --title-bg-color: #CCC;
   --button-color: #48F;
@@ -68,6 +69,7 @@ svg {
 .main .right {
   flex: 1 1 auto;
   overflow: auto;
+  background: var(--chart-area-bg-color);
 }
 .chart-holder {
   height: 100%;
@@ -127,6 +129,7 @@ input:checked + label {
     --main-bg-color: #444;
     --main-fg-color: #fff;
     --tooltip-bg-color: rgba(0, 0, 0, 0.7);
+    --chart-area-bg-color: #333;
 
     --title-bg-color: #222;
     --button-bg-color: #fff;
