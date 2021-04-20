@@ -1,0 +1,141 @@
+:root {
+  --main-bg-color: #eee;
+  --main-fg-color: #000;
+  --tooltip-bg-color: rgba(255, 255, 255, 0.7);
+  --selected-bg-color: #222;
+
+  --title-bg-color: #CCC;
+  --button-color: #48F;
+  --link-color: #36C;
+  --code-area-bg-color: #CCC;
+  --un-run-bg-color: #8AF;
+  --aborted-bg-color: #DDD;
+  --error-fg-color: darkred;
+  --warn-fg-color: brown;
+  --editor-bg-color: #fff;
+}
+html, body {
+  height: 100%;
+  color: var(--main-fg-color);
+  background: var(--main-bg-color);
+  font-family: monospace;
+}
+svg {
+  display: block;
+}
+
+#root,
+.App {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+}
+.radio>input {
+  margin: 0 0.4em 0 0.4em;
+}
+
+.header {
+  flex: 0 0 auto;
+  background: var(--title-bg-color);
+  font-size: x-large;
+  padding: 10px;
+}
+.heading {
+  font-weight: bold;
+}
+.indent {
+  margin-left: 1em;
+}
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0; /* make it vertically fit */
+}
+.main .left {
+  flex: 0 0 auto;
+  overflow: auto;
+}
+.main .left>div {
+  padding: 10px;
+}
+
+.main .right {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+.chart-holder {
+  height: 100%;
+}
+.chart-heading {
+  font-size: xx-large;
+  padding: 10px;
+}
+.charts {
+  width: 100%;
+}
+.charts>div {
+  width: 100%;
+}
+.chart {
+  width: 100%;
+  height: 500px;
+  max-width: 1000px;
+  display: flex;
+}
+.chart-graph {
+  width: 100%;
+}
+.chart-graph>div {
+  overflow: hidden;
+}
+.chart>div:nth-child(1) {
+  flex: 1 1 auto;
+}
+.char>div:nth-child(2) {
+  flex: 0 0 auto;
+}
+.chart .legend {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+.legend .legend-item {
+  display: flex;
+  align-items: center;
+}
+.legend-item .value {
+  margin-left: 0.25em;
+}
+
+.tooltip-content {
+  background: var(--tooltip-bg-color);
+  padding: 0.5em;
+}
+
+
+input:checked + label {
+  background: var(--selected-bg-color)
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg-color: #444;
+    --main-fg-color: #fff;
+    --tooltip-bg-color: rgba(0, 0, 0, 0.7);
+
+    --title-bg-color: #222;
+    --button-bg-color: #fff;
+    --link-color: #6CF;
+    --code-area-bg-color: #555;
+    --un-run-bg-color: blue;
+    --aborted-bg-color: #000;
+    --error-fg-color: red;
+    --warn-fg-color: yellow;
+    --editor-bg-color: #263238;
+  }
+}
