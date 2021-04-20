@@ -6,7 +6,7 @@ import {getData} from './data';
 
 function Error(props) {
   const {msg} = props;
-  return (<div className="error"><div>{msg} <span role="im" aria-label="sad">😢</span></div></div>);
+  return (<div className="error"><div>{msg} 😢</div></div>);
 }
 
 export default function App (props) {
@@ -26,7 +26,7 @@ export default function App (props) {
       <div className="header">gpustats.org</div>
       {
         error
-          ? <Error msg="could not fetch data" />
+          ? <Error msg={`could not fetch data: ${error}`} />
             : data 
               ? <RealApp data={data} />
               : <Loader />

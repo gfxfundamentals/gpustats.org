@@ -277,7 +277,7 @@ const data = {
 }
 */
 
-const data = {
+const sampleData = {
   startMonth: 1,
   categories,
 };
@@ -308,14 +308,33 @@ const data = {
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export async function getData() {
+  const q = Object.fromEntries(new URLSearchParams(window.location.search).entries());
+
   let error;
   let data;
-  try {
-    const req = await fetch('test-dadta.json');
-    data = await req.json();
-  } catch (e) {
-    error = e;
+  let url;
+  if (q.data === 'test') {
+    url = 'test-data.json';
+  } else if (q.data === 'error') {
+    url = 'not-exist-data.json';
+  } else if (q.data === 'sample') {
+    await wait(1000);
+    data = sampleData;
+  } else if (!q.data) {
+    url = 'data.json';
+  } else {
+    error = `unknown data parameter: ${q.data}`;
   }
+
+  if (!error && !data) {
+    try {
+      const req = await fetch(url);
+      data = await req.json();
+    } catch (e) {
+      error = `${url}: ${e}`;
+    }
+  }
+
   return {data, error};
 }
 
