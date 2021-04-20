@@ -120,10 +120,23 @@ svg {
   padding: 0.5em;
 }
 
-
 input:checked + label {
   background: var(--selected-bg-color)
 }
+
+.error {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.error>div {
+  padding: 1em;
+  background: red;
+  color: white;
+  font-size: large;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --main-bg-color: #444;

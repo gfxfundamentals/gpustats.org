@@ -305,6 +305,18 @@ const data = {
 }
 */
 
-export default data;
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+export async function getData() {
+  let error;
+  let data;
+  try {
+    const req = await fetch('test-dadta.json');
+    data = await req.json();
+  } catch (e) {
+    error = e;
+  }
+  return {data, error};
+}
 
 

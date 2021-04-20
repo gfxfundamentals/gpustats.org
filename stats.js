@@ -69,7 +69,7 @@ function getWebGL2Data() {
 function getGLData(version, featureNames) {
   const gl = document.createElement('canvas').getContext(version);
   if (!gl) {
-    return undefined;
+    return "not supported";
   }
   const precision = {};
   for (const shaderType of ['VERTEX_SHADER', 'FRAGMENT_SHADER']) {
@@ -123,6 +123,9 @@ function log(...args) {
 }
 
 function main() {
+  // need to record api failed vs api was not checked
+  // because we are not going to check all 3 APIs on the same
+  // machine since that would require creating 3 contexts.
   const data = {
     apis: {
       webgl: getWebGLData(),
