@@ -110,7 +110,7 @@ export default function RealApp (props) {
     }}>
       <div className="main">
         <div className="left layout-scrollbar">
-          <div>
+          <div className="menu">
             <APIs />
             <Filters />
             <Features />

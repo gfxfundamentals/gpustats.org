@@ -14,11 +14,11 @@ export default function Filters(props) {
       <div className="heading">Filters</div>
       <div>
         <div className="indent">
-          <div>Platform</div>
+          <div className="subheading">Platform</div>
           <MultipleSelection id="platforms" items={platforms} selectedItems={selectedPlatforms} onSelect={setPlatformFilter} />
         </div>
         <div className="indent">
-          <div>Browsers</div>
+          <div className="subheading">Browsers</div>
           <MultipleSelection id="browsers" items={browsers} selectedItems={selectedBrowsers} onSelect={setBrowserFilter} />
         </div>
       </div>
