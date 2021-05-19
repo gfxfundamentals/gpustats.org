@@ -22,6 +22,7 @@ export default function RealApp (props) {
   const [apiName, setAPIName] = useState(q.api || 'webgl');
   const [featureName, setFeatureName] = useState(q.featureName || '');
   const [extensionName, setExtensionName] = useState(q.extensionName || '');
+  const [dataParam, setDataParam] = useState(q.data || '');
 
   const allPlatforms = getPlatforms(data);
   const allBrowsers = getBrowsers(data);
@@ -34,6 +35,7 @@ export default function RealApp (props) {
 
   const handlePopState = () => {
     const q = Object.fromEntries(new URLSearchParams(window.location.search).entries());
+    setDataParam(q.data || '')
     setAPIName(q.api || 'webgl');
     setFeatureName(q.featureName || '');
     setExtensionName(q.extensionName || '');
@@ -45,6 +47,7 @@ export default function RealApp (props) {
 
   useEffect(() => {
     const q = {
+      ...(dataParam && {data: dataParam}),
       api: apiName,
       ...(showFeature && featureName && {featureName}),
       ...(showFeature && extensionName && {extensionName}),

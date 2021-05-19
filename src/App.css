@@ -137,6 +137,23 @@ input:checked + label {
   font-size: large;
 }
 
+.rsn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rsn>div {
+  padding: 1em;
+  background: darkcyan;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --main-bg-color: #444;
