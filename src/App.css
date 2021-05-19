@@ -46,7 +46,19 @@ svg {
   background: var(--title-bg-color);
   font-size: x-large;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+.header a {
+  display: block;
+}
+.header .icon {
+  width: 1.2em;
+  display: block;
+}
+
+/* --- */
 .heading {
   font-weight: bold;
 }

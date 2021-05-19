@@ -25,7 +25,14 @@ export default function App (props) {
 
   return (
     <div className="App">
-      <div className="header">gpustats.org</div>
+      <div className="header">
+        <div>gpustats.org</div>
+        <div>
+          <a href="https://github.com/gfxfundamentals/gpustats.org">
+            <img className="icon" alt="github icon" src="resources/images/octocat-icon.svg" />
+          </a>
+          </div>
+      </div>
       {
         error
           ? <Error msg={`could not fetch data: ${error}`} />
