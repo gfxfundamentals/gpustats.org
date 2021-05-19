@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useSet, useLocation, useSearchParam} from 'react-use';
+import {useSet} from 'react-use';
 import * as d3 from 'd3';
 import APIs from './APIs.js';
 import AreaChart from './AreaChart.js';
