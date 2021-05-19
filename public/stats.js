@@ -116,20 +116,67 @@ function getGLData(version, featureNames) {
   };
 }
 
+function setLikeToObject(setLike) {
+  return [...setLike.values()];
+}
+
+function mapLikeToObject(mapLike) {
+  const properties = {};
+  for (const v in mapLike) {
+    properties[v] = mapLike[v];
+  }
+  return properties;
+}
+
+function getAdapterData(adapter) {
+  return {
+    extensions: setLikeToObject(adapter.features),
+    features: mapLikeToObject(adapter.limits),
+  };
+}
+
+function randomElement(a) {
+  return a[Math.random() * a.length | 0];
+}
+
+async function getWebGPUData() {
+  if (!navigator.gpu?.requestAdapter) {
+    return 'not supported';
+  }
+
+  const preferences = [
+    "low-power",
+    "high-performance"
+  ];
+
+  const pref = randomElement(preferences);
+  const adapter = await navigator.gpu.requestAdapter({powerPreference: pref});
+  return adapter ? getAdapterData(adapter) : 'not supported';
+}
+
 function log(...args) {
   const elem = document.createElement('pre');
   elem.textContent = args.join(' ');
   document.body.appendChild(elem);
 }
 
-function main() {
-  // need to record api failed vs api was not checked
-  // because we are not going to check all 3 APIs on the same
-  // machine since that would require creating 3 contexts.
+// TODO: We should only do this once per user so set a cookie
+// or something (maybe that expires in 3 months) and skip all
+// of this if the cookie exists.
+//
+// Further, we should only check a single API because each API
+// requires a context and there is a context limit for the page
+//
+// This means we need to record api failed vs api was not checked
+// so that we only count failed as part of the total machines.
+
+async function main() {
+  const webgpu = await getWebGPUData();
   const data = {
     apis: {
       webgl: getWebGLData(),
       webgl2: getWebGL2Data(),
+      webgpu,
     },
     agent: {
       userAgent: navigator.userAgent,
@@ -142,7 +189,7 @@ function main() {
     },
   };
   log(JSON.stringify(data, null, 2));
-  log(JSON.stringify(data).length);
+  log('data length:', JSON.stringify(data).length);
 }
 
 main();
