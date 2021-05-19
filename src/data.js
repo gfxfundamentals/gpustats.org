@@ -194,10 +194,28 @@ function getWebGL2Data() {
 
 function getWebGPUData() {
   const features = [
-    'MIN_PROGRAM_TEXEL_OFFSET',
+    'maxTextureDimension1D',
+    'maxTextureDimension2D',
+    'maxTextureDimension3D',
+    'maxTextureArrayLayers',
+    'maxBindGroups',
+    'maxDynamicUniformBuffersPerPipelineLayout',
+    'maxDynamicStorageBuffersPerPipelineLayout',
+    'maxSampledTexturesPerShaderStage',
+    'maxSamplersPerShaderStage',
+    'maxStorageBuffersPerShaderStage',
+    'maxStorageTexturesPerShaderStage',
+    'maxUniformBuffersPerShaderStage',
+    'maxUniformBufferBindingSize',
+    'maxStorageBufferBindingSize',
+    'maxVertexBuffers',
+    'maxVertexAttributes',
+    'maxVertexBufferArrayStride',
   ];
   const extensions = [
-    'EXT_sRGB',
+    'shader-float16',
+    'texture-compression-bc',
+    'depth-clamping',
   ];
 
   return {
@@ -281,6 +299,8 @@ const sampleData = {
   startMonth: 1,
   categories,
 };
+
+console.log(JSON.stringify(sampleData));
 
 //console.log(JSON.stringify(data, null, 2).replace(/\[\s*\d+(?:,\s+\d+)*\s*\]/g, _ => _.replace(/[\n ]+/g, ' ')));
 //console.log(JSON.stringify(data).length);
