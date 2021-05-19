@@ -57,6 +57,9 @@ svg {
   width: 1.2em;
   display: block;
 }
+.header .fake {
+  color: red;
+}
 
 /* --- */
 
