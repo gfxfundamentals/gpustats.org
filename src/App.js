@@ -13,6 +13,8 @@ export default function App (props) {
   const [data, setData] = useState(false);
   const [error, setError] = useState(false);
 
+  const q = Object.fromEntries(new URLSearchParams(window.location.search).entries());
+
   useEffect(() => {
     (async() => {
       const {data, error} = await getData();
@@ -30,6 +32,15 @@ export default function App (props) {
             : data 
               ? <RealApp data={data} />
               : <Loader />
+      }
+      {
+        !q.data
+          ? <div className="rsn">
+              <div>This site is not ready. No data is available yet.{' '}
+                <a href="?data=sample">Click here</a>{' '}to view with fake data.
+              </div>
+            </div>
+          : []
       }
     </div>
   );
