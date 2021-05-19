@@ -26,7 +26,7 @@ export default function App (props) {
   return (
     <div className="App">
       <div className="header">
-        <div>gpustats.org{' '}{q.data ? <span className="fake">(Waring: Using fake data!)</span> : []}</div>
+        <div>gpustats.org{' '}{q.data ? <span className="fake">(Warning: Using fake data!)</span> : []}</div>
         <div>
           <a href="https://github.com/gfxfundamentals/gpustats.org">
             <img className="icon" alt="github icon" src="resources/images/octocat-icon.svg" />
