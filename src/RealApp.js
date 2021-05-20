@@ -119,9 +119,7 @@ export default function RealApp (props) {
         </div>
         <div className="right layout-scrollbar">
           <div className="charts">
-            <div>
-              <AreaChart />
-            </div>
+            <AreaChart />
           </div>
         </div>
       </div>
