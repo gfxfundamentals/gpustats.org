@@ -28,11 +28,11 @@ const renderTooltipContentImpl = valueFormatter => (o) => {
     <div className="tooltip-content legend">
         {
           payload.reverse().map((entry, index) => (
-            <>
-              <div key={`item1-${index}`} className="color"><Circle color={entry.color}/></div>
-              <div key={`item2-${index}`} className="value">{entry.name}</div>
-              <div key={`item3-${index}`} className="percent">{valueFormatter(entry.value, total)}</div>
-           </>
+            <React.Fragment key={`item-${index}`}>
+              <div className="color"><Circle color={entry.color}/></div>
+              <div className="value">{entry.name}</div>
+              <div className="percent">{valueFormatter(entry.value, total)}</div>
+           </React.Fragment>
           ))
         }
     </div>
@@ -56,11 +56,11 @@ function Legend(props) {
               ? last[category] / total * 100
               : last[category] * 100;
           return (
-            <>
-              <div key={`l1-${i}`} className="color"><Circle color={colors(array.length - i - 1)}/></div>
-              <div key={`l2-${i}`} className="value">{category}</div>
-              <div key={`l3-${i}`} className="percent">{percent.toFixed(0)}%</div>
-            </>
+            <React.Fragment key={`l-${i}`}>
+              <div className="color"><Circle color={colors(array.length - i - 1)}/></div>
+              <div className="value">{category}</div>
+              <div className="percent">{percent.toFixed(0)}%</div>
+            </React.Fragment>
           );
         })
       }
@@ -218,7 +218,7 @@ export default function FooChart(props) {
             </AreaChart>
           </ResponsiveContainer>
         </div>
-        <div class="legend-area">
+        <div className="legend-area">
           <Legend data={chartData} colors={colors} percentOfTotal={percentOfTotal} />
         </div>
       </div>

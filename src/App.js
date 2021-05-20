@@ -28,10 +28,10 @@ export default function App (props) {
       <div className="header">
         <div>gpustats.org{' '}{q.data ? <span className="fake">(Warning: Using fake data!)</span> : []}</div>
         <div>
-          <a class="about" href="https://github.com/gfxfundamentals/gpustats.org/blob/main/README.md">
+          <a className="about" href="https://github.com/gfxfundamentals/gpustats.org/blob/main/README.md">
             <img className="icon" alt="about icon" src="resources/images/about.svg" />
           </a>
-          <a class="github" href="https://github.com/gfxfundamentals/gpustats.org">
+          <a className="github" href="https://github.com/gfxfundamentals/gpustats.org">
             <img className="icon" alt="github icon" src="resources/images/octocat-icon.svg" />
           </a>
         </div>
