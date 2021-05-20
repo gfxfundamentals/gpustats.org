@@ -27,11 +27,12 @@ const renderTooltipContentImpl = valueFormatter => (o) => {
   return (
     <div className="tooltip-content legend">
         {
-          payload.map((entry, index) => (
-            <div className="legend-item" key={`item-${index}`}>
-              <div><Circle color={entry.color}/></div>
-              <div className="value">{`${entry.name}: ${valueFormatter(entry.value, total)}`}</div>
-           </div>
+          payload.reverse().map((entry, index) => (
+            <>
+              <div key={`item1-${index}`} className="color"><Circle color={entry.color}/></div>
+              <div key={`item2-${index}`} className="value">{entry.name}</div>
+              <div key={`item3-${index}`} className="percent">{valueFormatter(entry.value, total)}</div>
+           </>
           ))
         }
     </div>
@@ -50,15 +51,16 @@ function Legend(props) {
   return (
     <div className="legend">
       {
-        categories.map((category, i) => {
+        categories.reverse().map((category, i, array) => {
           const percent = percentOfTotal
               ? last[category] / total * 100
               : last[category] * 100;
           return (
-            <div key={`l-${i}`} className="legend-item">
-              <div><Circle color={colors(i)}/></div>
-              <div className="value">{category}:{percent.toFixed(0)}%</div>
-            </div>
+            <>
+              <div key={`l1-${i}`} className="color"><Circle color={colors(array.length - i - 1)}/></div>
+              <div key={`l2-${i}`} className="value">{category}</div>
+              <div key={`l3-${i}`} className="percent">{percent.toFixed(0)}%</div>
+            </>
           );
         })
       }
@@ -188,33 +190,37 @@ export default function FooChart(props) {
         {`${apiName}${justAPI ? '' : `: ${showFeature ? featureName : extensionName}`}`}
       </div>
       <div className="chart">
-        <ResponsiveContainer>
-          <AreaChart
-            data={chartData}
-            stackOffset={stackOffset}
-            margin={{
-              top: 0, right: 20, left: 0, bottom: 0,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="month"
-              tickFormatter={toMonth(5)} 
-              tick={{ fill: 'var(--main-fg-color)' }}
-             />
-            <YAxis
-              tickFormatter={toPercent}
-              tick={{ fill: 'var(--main-fg-color)' }}
-              domain={percentOfTotal ? [0, 'dataMax'] : [0, 1]}
-            />
-            <Tooltip content={percentOfTotal ? renderTooltipContentPercentOfTotal : renderTooltipContentPercent} animationDuration={0} />
-            {categories.map((category, i) => {
-              const color = colors(i);
-              return <Area key={`c${i}`} type="monotoneX" dataKey={category} stackId="1" stroke={color} fillOpacity={1} fill={color} />;
-            })}
-          </AreaChart>
-        </ResponsiveContainer>
-        <Legend data={chartData} colors={colors} percentOfTotal={percentOfTotal} />
+        <div className="graph-area">
+          <ResponsiveContainer>
+            <AreaChart
+              data={chartData}
+              stackOffset={stackOffset}
+              margin={{
+                top: 0, right: 20, left: 0, bottom: 0,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="month"
+                tickFormatter={toMonth(5)} 
+                tick={{ fill: 'var(--main-fg-color)' }}
+               />
+              <YAxis
+                tickFormatter={toPercent}
+                tick={{ fill: 'var(--main-fg-color)' }}
+                domain={percentOfTotal ? [0, 'dataMax'] : [0, 1]}
+              />
+              <Tooltip content={percentOfTotal ? renderTooltipContentPercentOfTotal : renderTooltipContentPercent} animationDuration={0} />
+              {categories.map((category, i) => {
+                const color = colors(i);
+                return <Area key={`c${i}`} type="monotoneX" dataKey={category} stackId="1" stroke={color} fillOpacity={1} fill={color} />;
+              })}
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+        <div class="legend-area">
+          <Legend data={chartData} colors={colors} percentOfTotal={percentOfTotal} />
+        </div>
       </div>
     </div>
   );

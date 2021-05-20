@@ -15,6 +15,12 @@
   --warn-fg-color: brown;
   --editor-bg-color: #fff;
 }
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
 html, body {
   height: 100%;
   color: var(--main-fg-color);
@@ -108,14 +114,17 @@ svg {
 }
 .charts {
   width: 100%;
+  height: 100%
 }
 .charts>div {
   width: 100%;
+  height: 100%
 }
 .chart {
   width: 100%;
   height: 500px;
   max-width: 1000px;
+  max-height: 100%;
   display: flex;
 }
 .chart-graph {
@@ -124,20 +133,37 @@ svg {
 .chart-graph>div {
   overflow: hidden;
 }
-.chart>div:nth-child(1) {
+.chart .graph-area {
   flex: 1 1 auto;
+  min-width: 0;
 }
-.char>div:nth-child(2) {
+.chart .legend-area {
   flex: 0 0 auto;
+  padding-right: 1em;
 }
 .chart .legend {
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
+  flex: 0 0 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(3, min-content);
 }
+
+.chart .legend .color {
+  grid-column: 1 / 2;
+}
+.chart .legend .value {
+  grid-column: 3 / 4;
+  padding-left: 0.5em;
+}
+.chart .legend .percent {
+  grid-column: 2 / 3;
+  padding-left: 0.5em;
+  text-align: right;
+}
+
 .legend .legend-item {
-  display: flex;
-  align-items: center;
+  gdisplay: flex;
+  galign-items: center;
 }
 .legend-item .value {
   margin-left: 0.25em;
@@ -180,6 +206,21 @@ input:checked + label {
 .rsn>div {
   padding: 1em;
   background: darkcyan;
+}
+
+@media (max-width: 700px) {
+  .main {
+    flex-direction: column;
+  }
+  .main .left {
+    flex: 1 1 33%;
+  }
+  .main .right {
+    flex: 1 1 67%;
+  }
+  .chart-heading {
+    font-size: large;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
