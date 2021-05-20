@@ -57,11 +57,12 @@ svg {
   align-items: center;
 }
 .header a {
-  display: block;
+  display: inline-block;
 }
+.header .about,
 .header .icon {
   width: 1.2em;
-  display: block;
+  display: inline-block;
 }
 .header .fake {
   color: red;
