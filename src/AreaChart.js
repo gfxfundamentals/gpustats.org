@@ -24,16 +24,22 @@ const renderTooltipContentImpl = valueFormatter => (o) => {
     return [];
   }
   const total = payload.reduce((result, entry) => (result + entry.value), 0);
+  let totalSoFar = 0;
   return (
     <div className="tooltip-content legend">
         {
-          payload.reverse().map((entry, index) => (
-            <React.Fragment key={`item-${index}`}>
-              <div className="color"><Circle color={entry.color}/></div>
-              <div className="value">{entry.name}</div>
-              <div className="percent">{valueFormatter(entry.value, total)}</div>
-           </React.Fragment>
-          ))
+          /* ugh, not sure what payload is here but
+             calling reverse directly on it does nothing */
+          [...payload].reverse().map((entry, index) => {
+            totalSoFar += entry.value;
+            return (
+              <React.Fragment key={`item-${index}`}>
+                <div className="color"><Circle color={entry.color}/></div>
+                <div className="value">{entry.name}</div>
+                <div className="percent">{valueFormatter(/*entry.value*/totalSoFar, total)}</div>
+              </React.Fragment>
+            );
+          })
         }
     </div>
   );
@@ -42,24 +48,26 @@ const renderTooltipContentPercentOfTotal = renderTooltipContentImpl(getPercent);
 const renderTooltipContentPercent = renderTooltipContentImpl(v => `${(v * 100).toFixed(0)}%`);
 
 function Legend(props) {
-  const {data, colors , percentOfTotal} = props;
+  const {data, colors, percentOfTotal} = props;
   const categories = data.length
       ? Object.keys(data[0]).filter(k => k !== 'month')
       : [];
   const last = data[data.length - 1];
   const total = categories.reduce((sum, category) => sum + last[category], 0);
+  let totalSoFar = 0;
   return (
     <div className="legend">
       {
         categories.reverse().map((category, i, array) => {
+          totalSoFar += last[category];
           const percent = percentOfTotal
-              ? last[category] / total * 100
+              ? totalSoFar / total * 100
               : last[category] * 100;
           return (
             <React.Fragment key={`l-${i}`}>
               <div className="color"><Circle color={colors(array.length - i - 1)}/></div>
               <div className="value">{category}</div>
-              <div className="percent">{percent.toFixed(0)}%</div>
+              <div className="percent">{Math.floor(percent).toFixed(0)}%</div>
             </React.Fragment>
           );
         })
