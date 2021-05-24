@@ -300,7 +300,7 @@ const sampleData = {
   categories,
 };
 
-console.log(JSON.stringify(sampleData));
+//console.log(JSON.stringify(sampleData));
 
 //console.log(JSON.stringify(data, null, 2).replace(/\[\s*\d+(?:,\s+\d+)*\s*\]/g, _ => _.replace(/[\n ]+/g, ' ')));
 //console.log(JSON.stringify(data).length);
